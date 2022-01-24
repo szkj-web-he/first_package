@@ -1,5 +1,5 @@
 {
-    "name": "he_packages",
+    "name": "he_package_1",
     "version": "0.0.1",
     "description": "这是一个基于react没有打包处理的包",
     "main": "Src/main.ts",
@@ -18,5 +18,8 @@
         "@types/react-dom": "^17.0.11",
         "react": "^17.0.2",
         "react-dom": "^17.0.2"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
     }
 }

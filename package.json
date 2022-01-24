@@ -1,0 +1,22 @@
+{
+    "name": "he_packages",
+    "version": "0.0.1",
+    "description": "这是一个基于react没有打包处理的包",
+    "main": "Src/main.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keyword": [
+        "transition",
+        "react",
+        "kite"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/react": "^17.0.38",
+        "@types/react-dom": "^17.0.11",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
+    }
+}

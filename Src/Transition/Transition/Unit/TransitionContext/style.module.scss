@@ -1,0 +1,223 @@
+/**
+* @file animation styles
+* @date 2021-05-27
+* @author xuejie.he
+* @lastModify xuejie.he 2021-05-27
+*/
+$name: "transition_";
+
+.#{$name}hidden {
+    display: none !important;
+}
+
+@mixin shake {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+}
+
+[transition-clock] {
+    position: absolute;
+    z-index: -999999;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.#{$name}fadeEnterActive,
+.#{$name}fadeLeaveActive {
+    transition: opacity 0.2s ease;
+}
+.#{$name}fadeToEnter,
+.#{$name}fadeFromLeave {
+    opacity: 1;
+}
+.#{$name}fadeFromEnter,
+.#{$name}fadeToLeave {
+    opacity: 0;
+}
+
+.#{$name}zoomEnterActive,
+.#{$name}zoomLeaveActive {
+    transition: transform 0.15s ease, opacity 0.2s ease;
+    @include shake();
+}
+.#{$name}zoomToEnter,
+.#{$name}zoomFromLeave {
+    transform: scale(1);
+    opacity: 1;
+}
+.#{$name}zoomFromEnter,
+.#{$name}zoomToLeave {
+    transform: scale(0);
+    opacity: 0;
+}
+
+.#{$name}tallerEnterActive,
+.#{$name}tallerLeaveActive {
+    transition: opacity 0.2s ease, height 0.2s ease;
+}
+
+.#{$name}tallerToEnter,
+.#{$name}tallerFromLeave {
+    opacity: 1;
+    overflow: hidden;
+}
+.#{$name}tallerFromEnter,
+.#{$name}tallerToLeave {
+    opacity: 0;
+    height: 0 !important;
+    overflow: hidden;
+}
+
+.#{$name}widerEnterActive,
+.#{$name}widerLeaveActive {
+    transition: opacity 0.2s ease, width 0.2s ease;
+}
+.#{$name}widerToEnter,
+.#{$name}widerFromLeave {
+    opacity: 1;
+    overflow: hidden;
+}
+.#{$name}widerFromEnter,
+.#{$name}widerToLeave {
+    opacity: 0;
+    width: 0 !important;
+    overflow: hidden;
+}
+
+.#{$name}inLeftEnterActive,
+.#{$name}inLeftLeaveActive {
+    transition: transform 0.15s ease, opacity 0.2s ease;
+    @include shake();
+}
+.#{$name}inLeftToEnter,
+.#{$name}inLeftFromLeave {
+    transform: translateX(0%);
+    opacity: 1;
+}
+.#{$name}inLeftFromEnter,
+.#{$name}inLeftToLeave {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.#{$name}inRightEnterActive,
+.#{$name}inRightLeaveActive {
+    transition: transform 0.15s ease, opacity 0.2s ease;
+    @include shake();
+}
+.#{$name}inRightToEnter,
+.#{$name}inRightFromLeave {
+    transform: translateX(0%) rotateZ(0deg);
+    opacity: 1;
+}
+.#{$name}inRightFromEnter,
+.#{$name}inRightToLeave {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.#{$name}inTopEnterActive,
+.#{$name}inTopLeaveActive {
+    transition: transform 0.15s ease, opacity 0.2s ease;
+    @include shake();
+}
+.#{$name}inTopToEnter,
+.#{$name}inTopFromLeave {
+    transform: translateY(0%);
+    opacity: 1;
+}
+.#{$name}inTopFromEnter,
+.#{$name}inTopToLeave {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.#{$name}inBottomEnterActive,
+.#{$name}inBottomLeaveActive {
+    transition: transform 0.15s ease, opacity 0.2s ease;
+    @include shake();
+}
+.#{$name}inBottomToEnter,
+.#{$name}inBottomFromLeave {
+    transform: translateY(0%);
+    opacity: 1;
+}
+.#{$name}inBottomFromEnter,
+.#{$name}inBottomToLeave {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.#{$name}slideDownEnterActive,
+.#{$name}slideDownLeaveActive {
+    transition: transform 0.15s ease, opacity 0.2s ease;
+    transform-origin: center top;
+    @include shake();
+}
+.#{$name}slideDownToEnter,
+.#{$name}slideDownFromLeave {
+    transform: scaleY(1);
+    opacity: 1;
+}
+.#{$name}slideDownFromEnter,
+.#{$name}slideDownToLeave {
+    transform: scaleY(0);
+    opacity: 0;
+}
+
+.#{$name}slideUpEnterActive,
+.#{$name}slideUpLeaveActive {
+    transition: transform 0.15s ease, opacity 0.2s ease;
+    transform-origin: center bottom;
+    @include shake();
+}
+
+.#{$name}slideUpToEnter,
+.#{$name}slideUpFromLeave {
+    transform: scaleY(1);
+    opacity: 1;
+}
+
+.#{$name}slideUpFromEnter,
+.#{$name}slideUpToLeave {
+    transform: scaleY(0);
+    opacity: 0;
+}
+
+.#{$name}slideLeftEnterActive,
+.#{$name}slideLeftLeaveActive {
+    transition: transform 0.15s ease, opacity 0.2s ease;
+    transform-origin: left center;
+    @include shake();
+}
+.#{$name}slideLeftToEnter,
+.#{$name}slideLeftFromLeave {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+.#{$name}slideLeftFromEnter,
+.#{$name}slideLeftToLeave {
+    transform: scaleX(0);
+    opacity: 0;
+}
+
+.#{$name}slideRightEnterActive,
+.#{$name}slideRightLeaveActive {
+    transition: transform 0.15s ease, opacity 0.2s ease;
+    transform-origin: right center;
+    @include shake();
+}
+
+.#{$name}slideRightToEnter,
+.#{$name}slideRightFromLeave {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+.#{$name}slideRightFromEnter,
+.#{$name}slideRightToLeave {
+    transform: scaleX(0);
+    opacity: 0;
+}

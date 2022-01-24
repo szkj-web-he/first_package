@@ -1,0 +1,270 @@
+/**
+* @file  *** styles
+* @date 2021-12-13
+* @author xuejie.he
+* @lastModify xuejie.he 2021-12-13
+*/
+/* <------------------------------------ **** CONSTANT IMPORT START **** ------------------------------------ */
+
+/* <------------------------------------ **** CONSTANT IMPORT END **** ------------------------------------ */
+/* <------------------------------------ **** SECTION1 MIXIN START **** ------------------------------------ */
+/** The demo mixin is ..........*/
+@mixin wrapper {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transition-duration: 0.15s;
+    z-index: 99;
+    .kite_body {
+        box-sizing: border-box;
+    }
+    .kite_triangle {
+        box-sizing: border-box;
+    }
+}
+
+@mixin bottom {
+    @include wrapper();
+    .kite_body {
+        order: 1;
+    }
+    .kite_triangle {
+        order: 0;
+    }
+}
+
+@mixin top {
+    @include wrapper();
+    .kite_body {
+        order: 0;
+    }
+    .kite_triangle {
+        order: 1;
+    }
+}
+
+@mixin left {
+    @include wrapper();
+    .kite_body {
+        order: 0;
+    }
+    .kite_triangle {
+        order: 1;
+    }
+}
+
+@mixin right {
+    @include wrapper();
+    .kite_body {
+        order: 1;
+    }
+    .kite_triangle {
+        order: 0;
+    }
+}
+
+@mixin horizontal {
+    flex-flow: row nowrap;
+}
+
+@mixin vertical {
+    flex-flow: column nowrap;
+}
+/* <------------------------------------ **** SECTION1 MIXIN END **** ------------------------------------ */
+/* <--------------------------- * SECTION1 * --------------------------- */
+/* <--------------------------- * SECTION1 * --------------------------- */
+
+.kite_ {
+    &vertical {
+        &Lb {
+            @include bottom();
+            @include vertical();
+        }
+        &Rb {
+            @include bottom();
+            @include vertical();
+        }
+        &Cb {
+            @include bottom();
+            @include vertical();
+        }
+        &Lt {
+            @include top();
+            @include vertical();
+        }
+        &Rt {
+            @include top();
+            @include vertical();
+        }
+        &Ct {
+            @include top();
+            @include vertical();
+        }
+    }
+    &horizontal {
+        &Lb {
+            @include left();
+            @include horizontal();
+        }
+        &Rb {
+            @include right();
+            @include horizontal();
+        }
+        &Lt {
+            @include left();
+            @include horizontal();
+        }
+        &Rt {
+            @include right();
+            @include horizontal();
+        }
+        &Rc {
+            @include right();
+            @include horizontal();
+        }
+        &Lc {
+            @include left();
+            @include horizontal();
+        }
+    }
+}
+
+.kite_reverse {
+    &.kite_ {
+        &vertical {
+            &Lb {
+                @include top();
+                @include vertical();
+            }
+            &Rb {
+                @include top();
+                @include vertical();
+            }
+            &Cb {
+                @include top();
+                @include vertical();
+            }
+            &Lt {
+                @include bottom();
+                @include vertical();
+            }
+            &Rt {
+                @include bottom();
+                @include vertical();
+            }
+            &Ct {
+                @include bottom();
+                @include vertical();
+            }
+        }
+        &horizontal {
+            &Lb {
+                @include right();
+                @include horizontal();
+            }
+            &Rb {
+                @include left();
+                @include horizontal();
+            }
+            &Lt {
+                @include right();
+                @include horizontal();
+            }
+            &Rt {
+                @include left();
+                @include horizontal();
+            }
+            &Rc {
+                @include left();
+                @include horizontal();
+            }
+            &Lc {
+                @include right();
+                @include horizontal();
+            }
+        }
+    }
+}
+
+.kite_triangle {
+    width: 0;
+    height: 0;
+    flex: 0 0 auto;
+    position: relative;
+}
+
+.kite_transition {
+    transition: transform 0.15s cubic-bezier(0.23, 1, 0.32, 1),
+        opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+}
+
+.kite_ {
+    &left {
+        &EnterActive,
+        &LeaveActive {
+            transform-origin: 100% 0;
+        }
+        &EnterTo,
+        &LeaveFrom {
+            opacity: 1;
+            transform: translateX(0) scaleX(1);
+        }
+        &EnterFrom,
+        &LeaveTo {
+            opacity: 0;
+            transform: translateX(5px) scaleX(0.5);
+        }
+    }
+    &right {
+        &EnterActive,
+        &LeaveActive {
+            transform-origin: 0 0;
+        }
+        &EnterTo,
+        &LeaveFrom {
+            opacity: 1;
+            transform: translateX(0px) scaleX(1);
+        }
+        &EnterFrom,
+        &LeaveTo {
+            opacity: 0;
+            transform: translateX(-5px) scaleX(0.5);
+        }
+    }
+    &top {
+        &EnterActive,
+        &LeaveActive {
+            transform-origin: 0 100%;
+        }
+        &EnterTo,
+        &LeaveFrom {
+            opacity: 1;
+            transform: translateY(0) scaleY(1);
+        }
+        &EnterFrom,
+        &LeaveTo {
+            opacity: 0;
+            transform: translateY(5px) scaleY(0.5);
+        }
+    }
+    &bottom {
+        &EnterActive,
+        &LeaveActive {
+            transform-origin: 0 0;
+        }
+        &EnterTo,
+        &LeaveFrom {
+            opacity: 1;
+            transform: translateY(0) scaleY(1);
+        }
+        &EnterFrom,
+        &LeaveTo {
+            opacity: 0;
+            transform: translateY(-5px) scaleY(0.5);
+        }
+    }
+}

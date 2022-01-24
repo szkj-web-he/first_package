@@ -1,0 +1,52 @@
+/**
+* @file animation scss
+* @date 2021-06-08
+* @author xuejie.he
+* @lastModify  xuejie.he 2021-06-08
+*/
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+.fade-enter-to,
+.fade-leave-from {
+    opacity: 1;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.model-enter-active,
+.model-leave-active {
+    transition: all 1s ease;
+    transform-origin: 50% 50%;
+}
+.model-enter-to,
+.model-leave-from {
+    opacity: 1;
+    transform: scale(1);
+}
+.model-enter-from,
+.model-leave-to {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.move-enter-active,
+.move-leave-active {
+    transition: all 1s ease;
+}
+.move-enter-to,
+.move-leave-from {
+    opacity: 1;
+    transform: translate(0, 0%);
+}
+.move-enter-from {
+    transform: translate(0, -100%);
+}
+.move-leave-to {
+    opacity: 0;
+    transform: translate(0, 100%);
+}

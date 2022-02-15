@@ -8,7 +8,6 @@
 /** This section will include all the necessary dependence for this tsx file */
 import React, { useMemo } from "react";
 import { splitNum } from "./splitNum";
-import { isTrue } from "./isTrue";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -95,8 +94,22 @@ const Triangle: React.VFC<TriangleProps> = ({
     /************* This section will include this component general function *************/
     const transformVal = () => {
         let str = "";
-        if (isTrue(x) && isTrue(y)) {
-            str += `translate(${x as number}px,${y as number}px)`;
+        let xVal = x,
+            yVal = y;
+        if (typeof xVal === "number" && typeof yVal === "number") {
+            switch (d) {
+                case "horizontal":
+                    if (reverse) {
+                        xVal = -(x as number);
+                    }
+                    break;
+                case "vertical":
+                    if (reverse) {
+                        yVal = -(y as number);
+                    }
+                    break;
+            }
+            str += `translate(${xVal}px,${yVal}px)`;
         }
         if (reverse) {
             str += ` rotate(180deg)`;

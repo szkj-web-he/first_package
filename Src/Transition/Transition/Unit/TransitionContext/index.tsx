@@ -231,7 +231,14 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>(
         const [readyStatus, setReadyStatus] = useState(false);
 
         /* <------------------------------------ **** HOOKS END **** ------------------------------------ */
+        const getSize = (el: HTMLElement) => {
+            const rect = el.getBoundingClientRect();
 
+            nodeSize.current = {
+                width: rect.width,
+                height: rect.height,
+            };
+        };
         /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
         /************* This section will include this component parameter *************/
         /**
@@ -307,10 +314,12 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>(
                 for (const itemKey in transitionClsData[key]) {
                     fn(
                         transitionClsData[key][itemKey],
-                        ((data as unknown) as Record<
-                            string,
-                            Record<string, string>
-                        >)[key][itemKey]
+                        (
+                            data as unknown as Record<
+                                string,
+                                Record<string, string>
+                            >
+                        )[key][itemKey]
                     );
                 }
             }
@@ -396,12 +405,7 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>(
                         )
                     );
                     commonData.current.transitionList = [];
-
-                    const rect = node.getBoundingClientRect();
-                    nodeSize.current = {
-                        width: rect.width,
-                        height: rect.height,
-                    };
+                    getSize(node);
                 }
             };
             const transitionEndFnWhenHidden = () => {
@@ -506,6 +510,7 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>(
                         commonData.current.transitionList
                     );
                 forceReflow();
+
                 if (node) {
                     transitionInfo = getTransitionAttr(node);
                 }
@@ -649,14 +654,10 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>(
                 if (isEnd) {
                     return;
                 }
-                const rect = node?.getBoundingClientRect();
-                if (rect) {
+                if (node) {
                     forceReflow();
-                    nodeSize.current = {
-                        width: rect.width,
-                        height: rect.height,
-                    };
-                    getNodeRect && getNodeRect(rect);
+                    getSize(node);
+                    getNodeRect && getNodeRect(node.getBoundingClientRect());
                 }
             };
             if (
@@ -677,60 +678,88 @@ const Transition = forwardRef<HTMLDivElement, TransitionProps>(
 
         useLayoutEffect(() => {
             const timer: { current: null | number } = { current: null };
-            let isEnd = false;
-            const init = async (node: HTMLElement) => {
-                const rect = node.getBoundingClientRect();
-                if (rect) {
-                    nodeSize.current = {
-                        width: rect.width,
-                        height: rect.height,
-                    };
-
-                    await nextFrame(() => {
-                        if (isEnd) {
-                            return;
-                        }
-                        getNodeRect && getNodeRect(rect);
-                    }, timer);
-
-                    addClass(
-                        node,
-                        styles.transition_hidden,
-                        commonData.current.transitionList
-                    );
-                    forceReflow();
-                    node.removeAttribute("transition-clock");
-                    if (isEnd) return;
-                    setReadyStatus(true);
-                }
+            const init = (node: HTMLElement) => {
+                node.setAttribute("transition-clock", "true");
+                removeClass(
+                    node,
+                    styles.transition_hidden,
+                    commonData.current.transitionList
+                );
+                forceReflow();
+                getSize(node);
+                getNodeRect && getNodeRect(node.getBoundingClientRect());
+                addClass(
+                    node,
+                    styles.transition_hidden,
+                    commonData.current.transitionList
+                );
+                forceReflow();
+                node.removeAttribute("transition-clock");
+                setReadyStatus(true);
             };
             const node = cRef.current;
-            if (node) {
+            if (node && !readyStatus && show) {
                 void init(node);
             }
             return () => {
-                isEnd = true;
+                timer.current && window.cancelAnimationFrame(timer.current);
             };
             // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, []);
+        }, [
+            show,
+            enterActive,
+            leaveActive,
+            toEnter,
+            toLeave,
+            fromEnter,
+            fromLeave,
+            children,
+            firstAnimation,
+            animationType,
+            getNodeRect,
+            handleTransitionEnd,
+            handleTransitionStart,
+            className,
+            style,
+            id,
+            title,
+            tabIndex,
+            onMouseOver,
+            onMouseOut,
+            onClick,
+            onMouseDown,
+            onMouseUp,
+            onFocus,
+            onBlur,
+            onMouseLeave,
+            onMouseEnter,
+            props,
+        ]);
+
+        useLayoutEffect(() => {
+            const node = cRef.current;
+            if (!readyStatus && node) {
+                addClass(
+                    node,
+                    styles.transition_hidden,
+                    commonData.current.transitionList
+                );
+            }
+        }, [readyStatus]);
 
         /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
         return (
             <div
                 id={id}
                 title={title}
-                {...Object.assign(
-                    {},
-                    !commonData.current.count
-                        ? { "transition-clock": "true" }
-                        : {}
-                )}
                 ref={(el) => {
                     cRef.current = el;
                     if (typeof ref === "function") {
                         ref(el);
                     } else if (ref !== null) {
-                        (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+                        (
+                            ref as React.MutableRefObject<HTMLElement | null>
+                        ).current = el;
                     }
                 }}
                 onMouseOver={onMouseOver}

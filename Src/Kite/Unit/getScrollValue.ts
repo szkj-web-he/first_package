@@ -11,8 +11,7 @@ export const getScrollValue = (): {
 } => {
     let x = window.scrollX || window.pageXOffset;
     let y = window.scrollY || window.pageYOffset;
-    const node = (document.documentElement ||
-        document.body.parentNode) as HTMLElement;
+    const node = document.documentElement || document.body.parentNode;
     if (!x) {
         x = (typeof node.scrollLeft == "number" ? node : document.body)
             .scrollLeft;

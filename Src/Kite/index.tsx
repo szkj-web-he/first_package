@@ -37,19 +37,19 @@ import { getScrollValue } from "./Unit/getScrollValue";
 /** This section will include all the interface for this tsx file */
 export interface KiteProps {
     /**
-     * The kite will fly around root
+     * 线圈
      */
     root: React.ReactElement | Element;
     /**
-     * Where to install the'Kite'
+     * 挂载点
      */
     mount?: Element;
     /**
-     * children of this component
+     * kite内容
      */
     children?: React.ReactNode;
     /**
-     * show of 'Kite
+     * show
      */
     show?: boolean;
     /**
@@ -458,12 +458,7 @@ export const Kite = forwardRef<HTMLDivElement, KiteProps>(
             return arr.join(" ");
         };
 
-        const setLatLng = ():
-            | {
-                  left: string;
-                  top: string;
-              }
-            | undefined => {
+        const setLatLng = () => {
             if (positional) {
                 if (mount) {
                     const pRect = mount.getBoundingClientRect();

@@ -5,8 +5,8 @@
  * @lastModify xuejie.he 2022-02-15
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
-/** This section will include all the necessary dependence for this tsx file */
-import { useState } from "react";
+/** This section will include all the  necessary dependence for this tsx file */
+import { useState, useRef } from "react";
 import { Kite, Transition } from "./main";
 import ReactDOM from "react-dom";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
@@ -20,6 +20,8 @@ const Temp = (): JSX.Element => {
     /************* This section will include this component HOOK function *************/
     const [tShow, setTShow] = useState(false);
     const [kShow, setKShow] = useState(false);
+    const tRef = useRef<HTMLDivElement | null>(null);
+    const kRef = useRef<HTMLDivElement | null>(null);
     /* <------------------------------------ **** STATE END **** ------------------------------------ */
     /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
     /************* This section will include this component parameter *************/
@@ -39,7 +41,7 @@ const Temp = (): JSX.Element => {
             >
                 看transition点我
             </button>
-            <Transition show={tShow} animationType="fade">
+            <Transition show={tShow} animationType="fade" ref={tRef}>
                 过渡内容
             </Transition>
 
@@ -49,6 +51,7 @@ const Temp = (): JSX.Element => {
                         setKShow(false);
                     }
                 }}
+                ref={kRef}
                 show={kShow}
                 root={
                     <button

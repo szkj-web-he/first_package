@@ -49,14 +49,15 @@ export interface KiteProps {
      */
     children?: React.ReactNode;
     /**
-     * show
+     * 是否可见
      */
     show?: boolean;
     /**
-     * width : The width of the box where the triangle is located
-     * height : The width of the box where the triangle is located
-     * color : Triangle color
-     * offset : Triangle offset
+     * 下拉三角的设置
+     * width:三角的宽
+     * height:三角的高
+     * color : 三角形的颜色
+     * offset : 三角形的偏移值设置
      */
     triangle?: {
         width: string;
@@ -86,7 +87,7 @@ export interface KiteProps {
      */
     style?: React.CSSProperties;
     /**
-     * offset of 'Kite'
+     * Kite的偏移值
      */
     offset?: {
         x?:
@@ -103,19 +104,25 @@ export interface KiteProps {
               ) => number);
     };
     /**
-     * Callback function for global click
+     * 全局点击事件的回调
      */
     handleGlobalClick?: (status: { isBtn: boolean; isMenu: boolean }) => void;
     /**
-     * Where to put it in root
+     * 起点 [x,y]
+     * l:Left
+     * r:Right
+     * c:Center
+     * t:Top
+     * b:Bottom
      */
     placement?: "lb" | "rb" | "cb" | "lt" | "rt" | "ct" | "rc" | "lc";
     /**
-     * The direction of the main axis
+     * 主轴
+     * 是水平方向还是垂直方向
      */
     direction?: "vertical" | "horizontal";
     /**
-     * Callback function for position change
+     * kite位置发生变化时的回调
      */
     handlePositionChange?: (
         x: number | undefined,
@@ -162,12 +169,13 @@ export interface KiteProps {
      */
     onMouseEnter?: () => void;
     /**
-     * Remove when the element is hidden
+     * 当Kite离开后是否删除节点
      */
     removeOnHidden?: boolean;
     /**
-     * Cache only works if removeOnHidden=true.
-     * When cache=true, as long as the element has been rendered, it will no longer be removed.  The opposite is the state of cache=false.
+     * 是否缓存节点。
+     * 这个属性和removeOnHidden联动才有效。
+     * 当cache=true,removeOnHidden=true时,只要渲染过一次,就不会被remove掉
      */
     cache?: boolean;
     /**

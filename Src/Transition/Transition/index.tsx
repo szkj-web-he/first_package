@@ -15,45 +15,43 @@ import TransitionContext from "./Unit/TransitionContext";
 
 export interface TransitionProps {
     /**
-     * is child component visible
+     * 是否可见
      */
     show: boolean;
     /**
-     * enter className
-     * * Intersection of fromEnter and toEnter
+     * 进入时候的 className
      */
     enterActive?: string;
     /**
-     * leave className
-     * * Intersection of fromLeave and toLeave
+     *  离开时候的 className
      */
     leaveActive?: string;
     /**
-     * ClassName when entering
+     * 进入结束的时候的className
      */
     toEnter?: string;
     /**
-     * ClassName when leaving
+     * 离开结束的时候的className
      */
     toLeave?: string;
     /**
-     * ClassName when starting to enter
+     * 开始进入时候的className
      */
     fromEnter?: string;
     /**
-     * ClassName when starting to leave
+     * 开始离开时候的className
      */
     fromLeave?: string;
     /**
-     * children of ReactNode
+     * 要执行过渡的主体
      */
     children: React.ReactNode;
     /**
-     * first animation
+     * 首次加载的时候是否要动画
      */
     firstAnimation?: boolean;
     /**
-     * The component library encapsulates several default animation libraries
+     * 这是已经集成了一部分的过渡效果
      */
     animationType?:
         | "fade"
@@ -69,80 +67,81 @@ export interface TransitionProps {
         | "slideLeft"
         | "slideRight";
     /**
-     * getBoundingClientRect callback
+     * 获取当前节点的 DOMRect
      */
     getNodeRect?: (res: DOMRect) => void;
     /**
-     * ontransitionEnd callback
+     * 过渡结束的时候的回调函数
      */
     handleTransitionEnd?: () => void;
     /**
-     * className of this component
+     * 这个组件的className
      */
     className?: string;
     /**
-     * style of this component
+     * 这个组件的style
      */
     style?: React.CSSProperties;
     /**
-     * tabIndex of this component
+     * 这个组件的tabIndex
      */
     tabIndex?: number;
     /**
-     * id of this component
+     * 这个组件的id
      */
     id?: string;
     /**
-     * title of this component
+     * 这个组件的title
      */
     title?: string;
     /**
-     * onMouseOver callback
+     * 这个组件的mouseOver事件回调
      */
     onMouseOver?: () => void;
     /**
-     * onMouseOut callback
+     * 这个组件的onMouseOut事件回调
      */
     onMouseOut?: () => void;
     /**
-     * onClick callback
+     * 这个组件的onClick事件回调
      */
     onClick?: () => void;
     /**
-     * onMouseDown callback
+     * 这个组件的onMouseDown事件回调
      */
     onMouseDown?: () => void;
     /**
-     * onMouseUp callback
+     * 这个组件的onMouseUp事件回调
      */
     onMouseUp?: () => void;
     /**
-     * Remove when the element is hidden
+     * 当Transition离开后是否删除节点
      */
     removeOnHidden?: boolean;
     /**
-     * Cache only works if removeOnHidden=true.
-     * When cache=true, as long as the element has been rendered, it will no longer be removed.  The opposite is the state of cache=false.
+     * 是否缓存节点。
+     * 这个属性和removeOnHidden联动才有效。
+     * 当cache=true,removeOnHidden=true时,只要渲染过一次,就不会被remove掉
      */
     cache?: boolean;
     /**
-     * onFocus callback
+     * 这个组件的onFocus事件回调
      */
     onFocus?: () => void;
     /**
-     * onBlur callback
+     * 这个组件的onBlur事件回调
      */
     onBlur?: () => void;
     /**
-     * onMouseLeave callback
+     * 这个组件的onMouseLeave事件回调
      */
     onMouseLeave?: () => void;
     /**
-     * onMouseEnter callback
+     * 这个组件的onMouseEnter事件回调
      */
     onMouseEnter?: () => void;
     /**
-     * transitionStart callback
+     * 当过渡动画开始执行时的回调函数
      */
     handleTransitionStart?: () => void;
 }

@@ -1,9 +1,9 @@
 {
     "name": "he_package_1",
-    "version": "0.1.0",
+    "version": "0.0.6",
     "description": "这是一个基于react没有打包处理的包",
     "main": "src/main.ts",
-    "keyword": [
+    "keywords": [
         "transition",
         "react",
         "kite"
